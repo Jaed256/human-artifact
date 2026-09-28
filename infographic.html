@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Great Acceleration | Jaed Pizarro</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1117;
+    --panel:#161b22;
+    --border:#30363d;
+    --text:#e6edf3;
+    --muted:#8b949e;
+    --accent:#58a6ff;
+    --accent2:#f0883e;
+    --accent3:#3fb950;
+    --accent4:#f85149;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    line-height:1.5;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:3rem 1.5rem 5rem}
+  header{text-align:center;margin-bottom:3rem}
+  header .kicker{color:var(--accent2);text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;font-weight:600}
+  header h1{font-size:2.4rem;line-height:1.15;margin:.6rem 0 1rem;font-weight:800}
+  header p{color:var(--muted);max-width:640px;margin:0 auto;font-size:1.05rem}
+  header .byline{margin-top:1.2rem;font-size:.85rem;color:var(--muted)}
+  section{margin-bottom:3.5rem}
+  .section-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:700;margin-bottom:.4rem}
+  h2{font-size:1.5rem;margin:.2rem 0 .8rem;font-weight:700}
+  .lede{color:var(--muted);font-size:1rem;margin-bottom:1.4rem;max-width:680px}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1.4rem}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.2rem}
+  .stat-card .num{font-size:2.1rem;font-weight:800;color:var(--accent)}
+  .stat-card.warn .num{color:var(--accent4)}
+  .stat-card.good .num{color:var(--accent3)}
+  .stat-card .label{color:var(--muted);font-size:.85rem;margin-top:.3rem}
+  .chart-holder{position:relative;height:260px}
+  .source{font-size:.72rem;color:var(--muted);margin-top:.7rem}
+  .callout{border-left:3px solid var(--accent2);padding:.8rem 1rem;background:rgba(240,136,62,.08);border-radius:0 8px 8px 0;font-size:.95rem;margin-top:1rem}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+  @media (max-width:700px){.split{grid-template-columns:1fr}}
+  .conclusion-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1rem}
+  @media (max-width:700px){.conclusion-grid{grid-template-columns:1fr}}
+  .conclusion-card{border-radius:12px;padding:1.4rem;border:1px solid var(--border)}
+  .conclusion-card.best{background:rgba(63,185,80,.08);border-color:rgba(63,185,80,.35)}
+  .conclusion-card.worst{background:rgba(248,81,73,.08);border-color:rgba(248,81,73,.35)}
+  .conclusion-card h3{margin:0 0 .5rem;font-size:1rem;text-transform:uppercase;letter-spacing:.06em}
+  .conclusion-card.best h3{color:var(--accent3)}
+  .conclusion-card.worst h3{color:var(--accent4)}
+  .conclusion-card p{margin:0;font-size:.92rem;color:var(--text)}
+  footer{border-top:1px solid var(--border);padding-top:1.6rem;color:var(--muted);font-size:.8rem}
+  footer a{color:var(--accent)}
+  .tag-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+  .tag{background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:.3rem .8rem;font-size:.75rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Human Artifact — Visualizing Information</div>
+    <h1>The Great Acceleration</h1>
+    <p>AI coding assistants adoption went from novelty to default in about two years. The industry's own numbers show what actually sped up — and what didn't.</p>
+    <div class="byline">By Jaed Pizarro · IDH3034 · Synaptic Commits</div>
+  </header>
+
+  <section>
+    <div class="section-label">01 — Adoption</div>
+    <h2>AI tools stopped being optional</h2>
+    <p class="lede">Across three independent industry surveys, AI-assisted coding crossed from "some developers" to "most developers" in a single reporting cycle.</p>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">90%</div>
+        <div class="label">of software professionals report using AI at work (DORA 2025, +14 pts YoY)</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">84%</div>
+        <div class="label">of developers use or plan to use AI tools (Stack Overflow 2025, up from 76%)</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">80%</div>
+        <div class="label">of new GitHub users try Copilot within their first week</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">986M</div>
+        <div class="label">commits pushed on GitHub in 2025, up 25% year over year</div>
+      </div>
+    </div>
+    <div class="source">Sources: GitHub Octoverse 2025 · Stack Overflow 2025 Developer Survey · DORA State of AI-Assisted Software Development 2025</div>
+  </section>
+
+  <section>
+    <div class="section-label">02 — Productivity vs. Trust</div>
+    <h2>Faster, and less trusted, at the same time</h2>
+    <p class="lede">The same developers reporting productivity gains are also reporting the lowest trust in AI accuracy Stack Overflow has recorded.</p>
+    <div class="panel">
+      <div class="chart-holder"><canvas id="trustChart"></canvas></div>
+      <div class="source">Sources: DORA 2025 (productivity, code quality) · Stack Overflow 2025 (trust, favorability)</div>
+    </div>
+    <div class="callout">DORA's own framing: AI is "an amplifier, not a fixer" — it magnifies whatever strengths or weaknesses a team's engineering practices already have.</div>
+  </section>
+
+  <section>
+    <div class="section-label">03 — The Real Bottleneck</div>
+    <h2>Typing was never the slow part</h2>
+    <p class="lede">Code generation sped up dramatically. Maintenance, review, and debugging did not keep pace — and DORA finds AI adoption is now negatively associated with delivery <em>stability</em>, even as throughput rises.</p>
+    <div class="split">
+      <div class="panel">
+        <div class="chart-holder"><canvas id="bottleneckChart"></canvas></div>
+        <div class="source" style="margin-top:.5rem">Conceptual sketch, not measured data — illustrates the gap the two stats on the right document.</div>
+      </div>
+      <div class="panel" style="display:flex;flex-direction:column;justify-content:center;gap:1rem">
+        <div><div class="num" style="font-size:1.8rem;font-weight:800;color:var(--accent4)">45%</div><div class="label" style="color:var(--muted);font-size:.85rem">of developers say debugging AI-generated code is <em>more</em> time-consuming, not less</div></div>
+        <div><div class="num" style="font-size:1.8rem;font-weight:800;color:var(--accent2)">66%</div><div class="label" style="color:var(--muted);font-size:.85rem">cite "almost right, but not quite" AI output as their top daily frustration</div></div>
+      </div>
+    </div>
+    <div class="source">Sources: Stack Overflow 2025 Developer Survey · DORA 2025 (throughput vs. stability relationship)</div>
+  </section>
+
+  <section>
+    <div class="section-label">04 — Where This Goes</div>
+    <h2>From autocomplete to autonomous agents</h2>
+    <p class="lede">GitHub's Copilot coding agent already opened more than 1 million pull requests between May and September 2025. The next step isn't a smarter autocomplete — it's agents that clone a repo, write tests, fix a broken pipeline, and open the PR themselves.</p>
+    <div class="conclusion-grid">
+      <div class="conclusion-card best">
+        <h3>Best case</h3>
+        <p>Developer friction largely disappears. Engineers spend their time on system architecture, security, and human-centered design instead of boilerplate and repetitive fixes.</p>
+      </div>
+      <div class="conclusion-card worst">
+        <h3>Worst case</h3>
+        <p>Fragile, AI-generated technical debt and security vulnerabilities accumulate in production codebases faster than humans — or the same AI tools — can audit them.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built for IDH3034 as part of my Human Artifact project. This is a work-in-progress reflection on AI coding assistants and the software development lifecycle — expect it to keep evolving over the semester.</p>
+    <p>Data: <a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener">GitHub Octoverse 2025</a> · <a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener">Stack Overflow 2025 Developer Survey</a> · <a href="https://dora.dev/dora-report-2025/" target="_blank" rel="noopener">DORA State of AI-Assisted Software Development 2025</a></p>
+    <p><a href="../">← Back to Human Artifact home</a></p>
+    <div class="tag-row">
+      <span class="tag">#HumansInAgeOfBots</span>
+      <span class="tag">#HumanArtifact</span>
+      <span class="tag">#Agency</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const textColor = '#8b949e';
+const gridColor = 'rgba(139,148,158,0.15)';
+Chart.defaults.color = textColor;
+Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
+
+new Chart(document.getElementById('trustChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Report productivity gain', 'Report better code quality', 'Highly trust AI accuracy', 'Favorable sentiment (2025)'],
+    datasets: [{
+      data: [80, 59, 3.1, 60],
+      backgroundColor: ['#3fb950', '#3fb950', '#f85149', '#f0883e'],
+      borderRadius: 6,
+      maxBarThickness: 46
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => c.parsed.x + '%' } } },
+    scales: {
+      x: { beginAtZero: true, max: 100, ticks: { callback: (v) => v + '%' }, grid: { color: gridColor } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+new Chart(document.getElementById('bottleneckChart'), {
+  type: 'line',
+  data: {
+    labels: ['2023', '2024', '2025'],
+    datasets: [
+      {
+        label: 'Code generation speed (conceptual)',
+        data: [1, 2.3, 3.4],
+        borderColor: '#58a6ff',
+        backgroundColor: '#58a6ff',
+        tension: 0.35,
+        pointRadius: 4
+      },
+      {
+        label: 'Debugging / maintenance speed (conceptual)',
+        data: [1, 1.15, 1.3],
+        borderColor: '#f85149',
+        backgroundColor: '#f85149',
+        tension: 0.35,
+        pointRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.y + '× baseline' } }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: { beginAtZero: true, grid: { color: gridColor }, ticks: { callback: (v) => v + '×' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
